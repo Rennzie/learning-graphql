@@ -1,48 +1,26 @@
-//@ts-check
 import React, { Fragment } from 'react';
-// @ts-ignore
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
-// import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
+import HomePage from './HomePage';
+import TweetPage from './TweetPage';
 import Header from './Header';
 import Tweet from './Tweet';
 // import { userFragment } from '../fragments';
 
-const GET_TWEETS = gql`
-  query {
-    tweet: Tweets {
-      id
-      body
-      date
-      Author {
-        id
-        username
-        first_name
-        last_name
-      }
-    }
-  }
-`;
-
 export default function App({ currentUser }) {
   return (
-    <Query query={GET_TWEETS}>
-      {({ data, loading, error }) => {
-        if (loading) return <div>LOADING ...</div>;
-        if (error) return <p>ERROR</p>;
-
-        console.log('========>', data);
-        return (
-          <Fragment>
-            <Header currentUser={currentUser} />
-            {data.tweet.map(tweet => (
-              <Tweet key={tweet.id} tweet={tweet} />
-            ))}
-          </Fragment>
-        );
-      }}
-    </Query>
+    <Fragment>
+      <Header currentUser={currentUser} />
+      <Switch>
+        <Route exact path="/" component={HomePage} />
+        <Route
+          path="/tweet/:tweetId"
+          render={props => <TweetPage {...props} tweetId={props.match.params.tweetId} />}
+        />
+      </Switch>
+    </Fragment>
   );
 }
 

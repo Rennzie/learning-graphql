@@ -57,24 +57,22 @@ const styleSheet = theme => ({
 
 function Tweet({ classes, tweet, showDetailsLink }) {
   return (
-    // <Link to={tweet.id}>
-    <Card>
-      <CardContent>
-        {/* <Avatar alt={tweet.Author.full_name} src={tweet.Author.avatar_url} /> */}
-        <div>
-          <span>{tweet.Author.full_name}</span>
-          <span>{tweet.Author.username}</span>
-          <span> - </span>
-          <span>{distanceInWordsToNow(tweet.date)}</span>
-          <Typography component="p">{tweet.body}</Typography>
-        </div>
-      </CardContent>
-    </Card>
-    // </Link>
+    <Link to={`/tweet/${tweet.id}`}>
+      <Card>
+        <CardContent>
+          {/* <Avatar alt={tweet.Author.full_name} src={tweet.Author.avatar_url} /> */}
+          <div>
+            <span>{tweet.Author.full_name}</span>
+            <span>{tweet.Author.username}</span>
+            <span> - </span>
+            <span>{distanceInWordsToNow(tweet.date)}</span>
+            <Typography component="p">{tweet.body}</Typography>
+          </div>
+        </CardContent>
+      </Card>
+    </Link>
   );
 }
-
-// Note: starting on the first garphql query
 
 // Tweet.propTypes = {
 //   classes: PropTypes.object.isRequired,

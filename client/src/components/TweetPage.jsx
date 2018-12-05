@@ -1,39 +1,40 @@
 import React from 'react';
-import { graphql } from 'react-apollo';
+import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 import { LinearProgress } from '@material-ui/core';
 
 import Tweet from './Tweet';
 import { userFragment } from '../fragments';
 
-export const TweetPage = ({ data: { loading, tweet } }) => (
-  <div>
-    {loading && <LinearProgress />}
-    {!loading && <Tweet tweet={tweet} />}
-  </div>
-);
-
-const query = gql`
-  ${userFragment}
-
-  query tweetPageQuery($id: ID!) {
-    tweet: Tweet(id: $id) {
+const GET_TWEET = gql`
+  query TweetPageQuery($tweetId: ID!) {
+    tweet: Tweet(_id: $tweetId) {
       id
       body
       date
       Author {
-        ...UserFields
-      }
-      Stats {
-        views
-        likes
-        retweets
-        responses
+        id
+        username
+        first_name
+        last_name
       }
     }
   }
 `;
 
-export default graphql(query, {
-  options: ({ match }) => ({ variables: { _id: match.params.id } })
-})(TweetPage);
+export default function TweetPage({ tweetId }) {
+  // const { tweetId } = props.match.params;
+  console.log('TweetPage has loaded', tweetId);
+  // console.log('the props on tweet page are', props);
+
+  return (
+    <Query query={GET_TWEET} variable={{ tweetId }}>
+      {({ data, loading, error }) => {
+        if (loading) return <LinearProgress />;
+        if (error) return <p>ERROR: {error.message}</p>;
+
+        return <Tweet key={data.tweet.id} tweet={data.tweet} />;
+      }}
+    </Query>
+  );
+}

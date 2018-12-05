@@ -4,7 +4,10 @@ mongoose.Promise = require('bluebird');
 
 // connect to Mongo using our dbURI
 const { DB_URI } = require('../config/environments');
-mongoose.connect(DB_URI, { useNewUrlParser: true });
+mongoose.connect(
+  DB_URI,
+  { useNewUrlParser: true }
+);
 
 // Models
 import User from '../models/User';
@@ -20,17 +23,33 @@ import moment from 'moment';
 const today = new Date();
 
 const tweetIds = [
-  '5b91752666708bc8b1622705', '5b91752666708bc8b1622706', '5b91752666708bc8b1622707', '5b91752666708bc8b1622708', '5b91752666708bc8b1622709',
-  '5b91752666708bc8b1622710', '5b91752666708bc8b162271a', '5b91752666708bc8b162271b', '5b91752666708bc8b162271c', '5b91752666708bc8b162271d',
-  '5b91752666708bc8b162271e', '5b91752666708bc8b162271f', '5b91752666708bc8b1622720', '5b91752666708bc8b1622721', '5b91752666708bc8b1622722'
+  '5b91752666708bc8b1622705',
+  '5b91752666708bc8b1622706',
+  '5b91752666708bc8b1622707',
+  '5b91752666708bc8b1622708',
+  '5b91752666708bc8b1622709',
+  '5b91752666708bc8b1622710',
+  '5b91752666708bc8b162271a',
+  '5b91752666708bc8b162271b',
+  '5b91752666708bc8b162271c',
+  '5b91752666708bc8b162271d',
+  '5b91752666708bc8b162271e',
+  '5b91752666708bc8b162271f',
+  '5b91752666708bc8b1622720',
+  '5b91752666708bc8b1622721',
+  '5b91752666708bc8b1622722'
 ];
 
 const userIds = [
-  '5b91752666708bc8b1622821', '5b91752666708bc8b1622806', '5b91752666708bc8b1622807'
+  '5b91752666708bc8b1622821',
+  '5b91752666708bc8b1622806',
+  '5b91752666708bc8b1622807'
 ];
 
 const categoryIds = [
-  '5b91752766708bc8b1622821', '5b91752766708bc8b1622806', '5b91752766708bc8b1622807'
+  '5b91752766708bc8b1622821',
+  '5b91752766708bc8b1622806',
+  '5b91752766708bc8b1622807'
 ];
 
 const tweetsData = [
@@ -81,23 +100,27 @@ const categoryData = [
     },
     currentMonthChanges: [
       {
-        createdAt: moment().set({'year': 2018, 'month': 10, 'date': 1}),
+        createdAt: moment().set({ year: 2018, month: 10, date: 1 }),
         reasonForChange: 'add',
         animalsMoved: 50
-      }, {
-        createdAt: moment().set({'year': 2018, 'month': 10, 'date': 7}),
+      },
+      {
+        createdAt: moment().set({ year: 2018, month: 10, date: 7 }),
         reasonForChange: 'theft',
         animalsMoved: -2
-      }, {
-        createdAt: moment().set({'year': 2018, 'month': 10, 'date': 10}),
+      },
+      {
+        createdAt: moment().set({ year: 2018, month: 10, date: 10 }),
         reasonForChange: 'sale',
         animalsMoved: -10
-      }, {
-        createdAt: moment().set({'year': 2018, 'month': 10, 'date': 12}),
+      },
+      {
+        createdAt: moment().set({ year: 2018, month: 10, date: 12 }),
         reasonForChange: 'add',
         animalsMoved: 10
-      }, {
-        createdAt: moment().set({'year': 2018, 'month': 10, 'date': 15}),
+      },
+      {
+        createdAt: moment().set({ year: 2018, month: 10, date: 15 }),
         reasonForChange: 'theft',
         animalsMoved: -1
       }
@@ -105,28 +128,29 @@ const categoryData = [
     changesArchive: {
       'Oct-2018': [
         {
-          createdAt: moment().set({'year': 2018, 'month': 9, 'date': 1}),
+          createdAt: moment().set({ year: 2018, month: 9, date: 1 }),
           reasonForChange: 'add',
           animalsMoved: 100
-        }, {
-          createdAt: moment().set({'year': 2018, 'month': 9, 'date': 10}),
+        },
+        {
+          createdAt: moment().set({ year: 2018, month: 9, date: 10 }),
           reasonForChange: 'sale',
           animalsMoved: -10
-        }, {
-          createdAt: moment().set({'year': 2018, 'month': 9, 'date': 20}),
+        },
+        {
+          createdAt: moment().set({ year: 2018, month: 9, date: 20 }),
           reasonForChange: 'death',
           animalsMoved: -2
-        }, {
-          createdAt: moment().set({'year': 2018, 'month': 9, 'date': 28}),
+        },
+        {
+          createdAt: moment().set({ year: 2018, month: 9, date: 28 }),
           reasonForChange: 'add',
           animalsMoved: 23
         }
       ]
     }
-
   }
 ];
-
 
 User.collection.drop();
 Tweet.collection.drop();
