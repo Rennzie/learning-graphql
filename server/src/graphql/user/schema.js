@@ -17,7 +17,7 @@ type User {
 }
 
 extend type Mutation {
-    login(email: String, password: String): String
+    login(email: String): String
 }
 `;
 

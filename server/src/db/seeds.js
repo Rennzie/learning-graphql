@@ -69,9 +69,10 @@ const usersData = [
   {
     _id: userIds[0],
     username: 'johndoe',
+    email: 'rnnsea001@gmail.com',
     first_name: 'John',
     last_name: 'Doe',
-    avatar_url: 'https://material-ui-1dab0.firebaseapp.com/static/images/remy.jpg'
+    avatar_url: 'https://avatars0.githubusercontent.com/u/32762874?s=460&v=4'
   },
   {
     _id: userIds[1],

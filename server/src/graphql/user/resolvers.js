@@ -1,3 +1,5 @@
+import jwt from 'jsonwebtoken';
+
 // import DataLoader from 'dataloader';
 
 // import User from '../../models/User';
@@ -7,7 +9,7 @@ function createAndSendToken(user) {
     sub: user.id,
     username: user.username
   };
-  const token = jwt.sign(payload, SECRET, { expiresIn: '6h' });
+  const token = jwt.sign(payload, 'SECRET', { expiresIn: '6h' });
   return token;
 }
 

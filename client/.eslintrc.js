@@ -10,7 +10,7 @@ module.exports = {
     }
   },
   extends: ['plugin:prettier/recommended', 'airbnb'],
-  plugins: ['jsdoc', 'react', 'jsx-a11y', 'import', 'prettier', 'graphql'],
+  plugins: ['jsdoc', 'react', 'jsx-a11y', 'import', 'graphql', 'prettier'],
   env: {
     es6: true,
     browser: true,

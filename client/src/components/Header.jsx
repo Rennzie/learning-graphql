@@ -1,14 +1,17 @@
 // in Header.js
-import React from 'react';
+import React, { Fragment } from 'react';
+import { Query } from 'react-apollo';
+import gql from 'graphql-tag';
+import { Link, withRouter } from 'react-router-dom';
 // import PropTypes from 'prop-types';
-import AppBar from '@material-ui/core/AppBar';
-import Avatar from '@material-ui/core/Avatar';
-import IconButton from '@material-ui/core/IconButton';
+
+import { AppBar, Avatar, IconButton, Toolbar, Typography } from '@material-ui/core';
 import ModeEditIcon from '@material-ui/icons/Edit';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
-import { Link } from 'react-router-dom';
+
+import { USER_INFO } from '../fragments';
+
+import Auth from '../lib/Auth';
 
 const styleSheet = theme => ({
   title: {
@@ -16,22 +19,58 @@ const styleSheet = theme => ({
   }
 });
 
+const GET_USER = gql`
+  query LoggedInUserQuery($userId: ID!) {
+    user: User(_id: $userId) {
+      ...UserFields
+    }
+  }
+  ${USER_INFO}
+`;
+
 function Header({ classes, currentUser }) {
   return (
-    <AppBar position="static" color="default">
-      <Toolbar>
-        {currentUser && <Avatar alt={currentUser.full_name} src={currentUser.avatar_url} />}
-        <Typography type="title" color="inherit">
-          Home
-        </Typography>
-        <IconButton>
-          <ModeEditIcon />
-        </IconButton>
-        <Typography component={Link} to="/login">
-          Login
-        </Typography>
-      </Toolbar>
-    </AppBar>
+    <Fragment>
+      {localStorage.getItem('token') ? (
+        <Query query={GET_USER} variables={{ userId: Auth.currentUserId() }}>
+          {({ data, loading, error }) => {
+            if (loading) return <p>Loading...</p>;
+            if (error) return <p>ERROR: {error.message}</p>;
+
+            return (
+              <AppBar position="static" color="default">
+                <Toolbar>
+                  {<Avatar alt={data.user.full_name} src={data.user.avatar_url} />}
+                  <Typography type="title" color="inherit">
+                    Home
+                  </Typography>
+                  <IconButton>
+                    <ModeEditIcon />
+                  </IconButton>
+                  <Typography component={Link} to="/login">
+                    Log Out
+                  </Typography>
+                </Toolbar>
+              </AppBar>
+            );
+          }}
+        </Query>
+      ) : (
+        <AppBar position="static" color="default">
+          <Toolbar>
+            <Typography type="title" color="inherit">
+              Home
+            </Typography>
+            <IconButton>
+              <ModeEditIcon />
+            </IconButton>
+            <Typography component={Link} to="/login">
+              Login
+            </Typography>
+          </Toolbar>
+        </AppBar>
+      )}
+    </Fragment>
   );
 }
 

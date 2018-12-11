@@ -1,5 +1,5 @@
 import React, { Fragment, Component } from 'react';
-import { withRouter, Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 import { Typography, Input, FormControl, InputLabel, Button } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
@@ -23,14 +23,8 @@ const styles = theme => ({
 
 class Login extends Component {
   state = {
-    // passwordVisible: false,
-    email: 'rnnsea001@gmail.com',
-    password: 'pass'
+    email: 'rnnsea001@gmail.com'
   };
-
-  componentDidMount() {
-    console.log('the login props are', this.props.login);
-  }
 
   handleChange = name => event => {
     this.setState({ [name]: event.target.value });
@@ -38,18 +32,18 @@ class Login extends Component {
 
   handleLogin = () => {
     const { login } = this.props;
-    const { email, password } = this.state;
+    const { email } = this.state;
 
-    login({ variables: { email, password } });
+    login({ variables: { email } });
   };
 
   render() {
-    const { email, password } = this.state;
+    const { email } = this.state;
     const { classes } = this.props;
 
     return (
       <Fragment>
-        <Typography variant="h5" align="center">
+        <Typography className={classes.margin} variant="h5" align="center">
           Login
         </Typography>
 
@@ -68,31 +62,9 @@ class Login extends Component {
                 onChange={this.handleChange('email')}
               />
             </FormControl>
-            <FormControl className={classes.margin}>
-              <InputLabel shrink htmlFor="password">
-                Password
-              </InputLabel>
-              <Input
-                fullWidth
-                type="password"
-                name="password"
-                id="password"
-                value={password}
-                onChange={this.handleChange('password')}
-              />
-            </FormControl>
 
             <Button onClick={this.handleLogin} className={classes.margin} color="secondary">
               Login
-            </Button>
-            <Button
-              component={Link}
-              to="/register"
-              variant="text"
-              className={classes.margin}
-              color="secondary"
-            >
-              Not got an account? Register
             </Button>
           </section>
         </div>
