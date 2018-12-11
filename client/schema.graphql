@@ -1,0 +1,89 @@
+# source: http://localhost:4000/graphql
+# timestamp: Thu Dec 06 2018 08:49:37 GMT+0000 (GMT)
+
+type Category {
+  _id: ID!
+  id: ID
+  Farmer: User
+  name: String
+  category: String
+  currentMonthDetail: MonthDetail
+  currentMonthChanges: [ChangeTracker]
+}
+
+type ChangeTracker {
+  createdAt: Date
+  reasonForChange: String
+  animalsMoved: Int
+  notes: String
+}
+
+"""Date type"""
+scalar Date
+
+type DetailSummary {
+  add: Int
+  purchase: Int
+  death: Int
+  theft: Int
+  sale: Int
+  other: Int
+}
+
+type Meta {
+  count: Int
+}
+
+type MonthDetail {
+  openingTotal: Int
+  closingTotal: Int
+  period: String
+  changes: DetailSummary
+}
+
+type Mutation {
+  dummy: Boolean
+  createCategory(farmer_id: ID, name: String, category: String): Category
+  createNewChange(id: ID, createdAt: Date, reasonForChange: String, animalsMoved: Int): Category
+  createTweet(author_id: ID, body: String): Tweet
+  deleteTweet(id: ID!): Tweet
+  markTweetRead(id: ID!): Boolean
+}
+
+type Query {
+  dummy: Boolean
+  Category(_id: ID!): Category
+  Categories: [Category]
+  User(_id: ID!): User
+  Users: [User]
+  Tweet(_id: ID!): Tweet
+  Tweets(limit: Int, skip: Int, sort_field: String, sort_order: String): [Tweet]
+  TweetsMeta: Meta
+}
+
+type Tweet {
+  _id: ID!
+  id: ID
+
+  """The tweet text. No more than 140 characters!"""
+  body: String
+
+  """When the tweet was published"""
+  date: Date
+
+  """Who published the tweet"""
+  Author: User
+}
+
+scalar Url
+
+type User {
+  _id: ID!
+  id: ID
+  username: String
+  first_name: String
+  last_name: String
+  full_name: String
+  name: String @deprecated
+  avatar_url: String
+}

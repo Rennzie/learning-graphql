@@ -11,4 +11,3 @@ export default makeExecutableSchema({
   logging: { log: err => console.log(err)}
 });
 
-// NOTE: implemented contexts now to create mutations then we are done

@@ -1,13 +1,10 @@
 import React, { Fragment } from 'react';
-import { Query } from 'react-apollo';
-import gql from 'graphql-tag';
 import { Route, Switch } from 'react-router-dom';
 
 import HomePage from './HomePage';
 import TweetPage from './TweetPage';
 import Header from './Header';
-import Tweet from './Tweet';
-// import { userFragment } from '../fragments';
+import Login from './Login';
 
 export default function App({ currentUser }) {
   return (
@@ -15,10 +12,8 @@ export default function App({ currentUser }) {
       <Header currentUser={currentUser} />
       <Switch>
         <Route exact path="/" component={HomePage} />
-        <Route
-          path="/tweet/:tweetId"
-          render={props => <TweetPage {...props} tweetId={props.match.params.tweetId} />}
-        />
+        <Route exact path="/login" component={Login} />
+        <Route path="/tweet/:tweetId" component={TweetPage} />
       </Switch>
     </Fragment>
   );

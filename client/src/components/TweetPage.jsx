@@ -4,7 +4,7 @@ import gql from 'graphql-tag';
 import { LinearProgress } from '@material-ui/core';
 
 import Tweet from './Tweet';
-import { userFragment } from '../fragments';
+import { USER_INFO } from '../fragments';
 
 const GET_TWEET = gql`
   query TweetPageQuery($tweetId: ID!) {
@@ -13,22 +13,16 @@ const GET_TWEET = gql`
       body
       date
       Author {
-        id
-        username
-        first_name
-        last_name
+        ...UserFields
       }
     }
   }
+  ${USER_INFO}
 `;
 
-export default function TweetPage({ tweetId }) {
-  // const { tweetId } = props.match.params;
-  console.log('TweetPage has loaded', tweetId);
-  // console.log('the props on tweet page are', props);
-
+export default function TweetPage({ match }) {
   return (
-    <Query query={GET_TWEET} variable={{ tweetId }}>
+    <Query query={GET_TWEET} variables={{ tweetId: match.params.tweetId }}>
       {({ data, loading, error }) => {
         if (loading) return <LinearProgress />;
         if (error) return <p>ERROR: {error.message}</p>;

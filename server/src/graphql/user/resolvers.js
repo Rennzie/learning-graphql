@@ -2,16 +2,31 @@
 
 // import User from '../../models/User';
 
-export const Query = {
+function createAndSendToken(user) {
+  const payload = {
+    sub: user.id,
+    username: user.username
+  };
+  const token = jwt.sign(payload, SECRET, { expiresIn: '6h' });
+  return token;
+}
 
-  User: async (root, {_id}, context) => {
+export const Query = {
+  User: async (root, { _id }, context) => {
     return await context.User.findById(_id);
   },
 
   Users: async (_, __, context) => {
     return await context.User.find();
   }
+};
 
+export const Mutation = {
+  login: async (_, { email }, { User }) => {
+    const user = await User.findOne({ email: email });
+
+    if (user) return createAndSendToken(user);
+  }
 };
 
 // export const User = {

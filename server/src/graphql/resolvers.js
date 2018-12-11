@@ -1,8 +1,4 @@
-import {
-  Query as TweetQuery,
-  Mutation as TweetMutation,
-  Tweet
-} from './tweet/resolvers';
+import { Query as TweetQuery, Mutation as TweetMutation, Tweet } from './tweet/resolvers';
 
 import {
   Query as CategoryQuery,
@@ -11,7 +7,7 @@ import {
 } from './category/resolvers';
 
 // NOTE: removed User from user/resolvers import
-import { Query as UserQuery  } from './user/resolvers';
+import { Query as UserQuery, Mutation as UserMutation } from './user/resolvers';
 import Date from './scalar/Date';
 
 export default {
@@ -22,7 +18,8 @@ export default {
   },
   Mutation: {
     ...TweetMutation,
-    ...CategoryMutation
+    ...CategoryMutation,
+    ...UserMutation
   },
   Tweet,
   Category,

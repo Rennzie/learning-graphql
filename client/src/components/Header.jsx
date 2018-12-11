@@ -8,7 +8,7 @@ import ModeEditIcon from '@material-ui/icons/Edit';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const styleSheet = theme => ({
   title: {
@@ -27,6 +27,9 @@ function Header({ classes, currentUser }) {
         <IconButton>
           <ModeEditIcon />
         </IconButton>
+        <Typography component={Link} to="/login">
+          Login
+        </Typography>
       </Toolbar>
     </AppBar>
   );

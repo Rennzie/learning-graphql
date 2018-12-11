@@ -15,6 +15,10 @@ type User {
     name: String @deprecated
     avatar_url: String
 }
+
+extend type Mutation {
+    login(email: String, password: String): String
+}
 `;
 
 export default () => [User, Base];

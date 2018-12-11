@@ -15,8 +15,7 @@ module.exports = {
     es6: true,
     browser: true,
     node: true,
-    jest: true,
-    apollo: true
+    jest: true
   },
   rules: {
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
@@ -44,7 +43,7 @@ module.exports = {
       {
         // Import default settings for your GraphQL client. Supported values:
         // 'apollo', 'relay', 'lokka', 'fraql', 'literal'
-        // env: 'apollo',
+        env: 'apollo',
 
         // Import your schema JSON here
         schemaJson: require('./schema.json')

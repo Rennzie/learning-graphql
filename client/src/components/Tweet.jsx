@@ -3,10 +3,7 @@ import React from 'react';
 import { Card, CardContent } from '@material-ui/core';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
-import CachedIcon from '@material-ui/icons/Cached';
-import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
-import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
-import { withStyles, createMuiTheme } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import distanceInWordsToNow from 'date-fns/distance_in_words_to_now';
 import { Link } from 'react-router-dom';
 
@@ -53,7 +50,7 @@ const styleSheet = theme => ({
   }
 });
 
-// Note: next up is fetching a single tweet using a variable
+// NOTE: next up is fetching a single tweet using a variable
 
 function Tweet({ classes, tweet, showDetailsLink }) {
   return (

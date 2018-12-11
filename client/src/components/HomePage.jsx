@@ -6,7 +6,7 @@ import gql from 'graphql-tag';
 import { LinearProgress } from '@material-ui/core';
 
 import Tweet from './Tweet';
-import { userFragment } from '../fragments';
+import { USER_INFO } from '../fragments';
 
 const GET_TWEETS = gql`
   query {
@@ -15,13 +15,11 @@ const GET_TWEETS = gql`
       body
       date
       Author {
-        id
-        username
-        first_name
-        last_name
+        ...UserFields
       }
     }
   }
+  ${USER_INFO}
 `;
 
 export default function HomePage() {
